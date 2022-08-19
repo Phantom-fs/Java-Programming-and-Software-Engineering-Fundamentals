@@ -1,2 +1,23 @@
-# Java-Programming-and-Software-Engineering-Fundamentals
-Programming ASSIGNMENTS and QUIZ answers from JAVA PROGRAMMING AND SOFTWARE ENGINEERING FUNDAMENTALS Coursera SPECIALIZATION 
+# COURSERA
+# Java Programming and Software Engineering Fundamentals
+
+### [Java Programming and Software Engineering Fundamentals](https://www.coursera.org/specializations/java-programming) ###
+   -> **by Duke University**
+
+- - - - 
+   
+  * [Programming Foundations with JavaScript, HTML and CSS](https://www.coursera.org/learn/duke-programming-web?specialization=java-programming)
+  * [Java Programming: Solving Problems with Software](https://www.coursera.org/learn/java-programming?specialization=java-programming)
+  * [Java Programming: Arrays, Lists, and Structured Data](https://www.coursera.org/learn/java-programming-arrays-lists-data?specialization=java-programming)
+  * [Java Programming: Principles of Software Design](https://www.coursera.org/learn/java-programming-design-principles?specialization=java-programming)
+  * [Java Programming: Build a Recommendation System](https://www.coursera.org/learn/java-programming-recommender?specialization=java-programming)
+
+- - - -
+
+-*THESE CODES ARE ONLY PROVIDED FOR EDUCATIONAL PURPOSES*
+
+-*Free to use code*
+
+-*Please refrain from submitting the same code in assignment as its plagiarism and your account may get deactivated, this answers are only provided as an example and for understanding*
+
+- - - -
