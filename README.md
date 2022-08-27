@@ -14,7 +14,7 @@
 
 - - - -
 
-# RESOURCES
+# Resources 
    -> **provided for the specialization by Duke University**
 
   * [Programming Foundations with JavaScript, HTML and CSS](https://www.dukelearntoprogram.com//course1/index.php)
