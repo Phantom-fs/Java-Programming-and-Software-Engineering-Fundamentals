@@ -6,6 +6,7 @@ Program to find the all the gene in DNA strand ith muliple end codon support
 //rename the file to FindingMultipleGene
 //Coder: Phantom-fs
 
+import java.lang.String;
 
 public class FindingMultipleGene 
 {
