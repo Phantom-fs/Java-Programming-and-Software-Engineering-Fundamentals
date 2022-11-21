@@ -6,7 +6,6 @@ Program to find the simple Gene strand from the pre-given input and having mulip
 //rename the file to FindingSingleGeneAndMultipleStopCodon
 //Coder: Phantom-fs
 
-package DNA;
 import java.lang.String;
 
 public class FindingSingleGeneAndMultipleStopCodon 
