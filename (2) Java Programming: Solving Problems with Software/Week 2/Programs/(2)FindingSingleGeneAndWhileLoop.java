@@ -6,7 +6,6 @@ Program to find the simple Gene strand from the pre-given input and using while 
 //rename the file to FindingSingleGeneAndWhileLoop
 //Coder: Phantom-fs
 
-package DNA;
 import java.lang.String;
 
 public class FindingSingleGeneAndWhileLoop 
