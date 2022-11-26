@@ -2,7 +2,7 @@
 
 - - - -
 
-Complete program of week 2, with all the concepts ranging from finding gene with muilple codon (TAA, TGA, TAG), as well as finding multiple genome in the DNA 
+Complete program of week 2, with all the concepts ranging from finding gene with muiltple codon (TAA, TGA, TAG), as well as finding multiple genome in the DNA 
 
 - - - -
 
