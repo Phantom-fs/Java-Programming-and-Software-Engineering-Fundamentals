@@ -9,6 +9,7 @@
 package CollegeDatabase;
 
 import java.io.FilterInputStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.Character;
 
@@ -59,6 +60,9 @@ public class ProfessorDetails extends CollegeDatabase
 
     public void addProfessorDetails (int i)
     {
+        //clear the screen before displaying the options and menu
+        super.clearScreen();
+
         String newline = System.lineSeparator();
         Scanner scanner = new Scanner(new FilterInputStream(new FilterInputStream(System.in){public void close(){}}){public void close(){}});
 
@@ -74,12 +78,109 @@ public class ProfessorDetails extends CollegeDatabase
         String email = scanner.nextLine();
         System.out.print("Enter the phone number of the Professor: ");
         String phone = scanner.nextLine();
+
+        int count = 1;
+        //String input in integer; exception handling
+        //salary input mismatch exception
+        int salary;
         System.out.print("Enter the salary of the Professor: ");
-        int salary = scanner.nextInt();
+        while(true)
+        {
+            try
+            {
+                salary = scanner.nextInt();
+                if(salary < 0)
+                {
+                    System.out.print(newline+"Salary cannot be negative. Please enter a valid salary : ");
+                    continue;
+                }
+                else
+                {
+                    if (count > 1)
+                        System.out.print(newline);
+                    break;
+                }
+
+            }
+            catch (InputMismatchException e)
+            {
+                //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                if(count == 1)
+                {
+                    System.out.print(newline);
+                    count++;
+                }                
+                System.out.print("Invalid input. Please enter a valid salary : ");
+                scanner.next();
+            }
+        }
+
+        count = 1;
+        //number of students under professor input mismatch exception
+        int studentsUnderProfessor;
         System.out.print("Enter the number of students under the Professor: ");
-        int studentsUnderProfessor = scanner.nextInt();
+        while(true)
+        {
+            try
+            {
+                studentsUnderProfessor = scanner.nextInt();
+                if(studentsUnderProfessor < 0)
+                {
+                    System.out.print(newline+"Number of students cannot be negative. Please enter a valid number of students : ");
+                    continue;
+                }
+                else
+                {
+                    if (count > 1)
+                        System.out.print(newline);
+                    break;
+                }
+            }
+            catch (InputMismatchException e)
+            {
+                //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                if(count == 1)
+                {
+                    System.out.print(newline);
+                    count++;
+                }
+                System.out.print("Invalid input. Please enter a valid number of students : ");
+                scanner.next();
+            }
+        }
+
+        count = 1;
+        //number of classes under professor input mismatch exception
+        int classesUnderProfessor;
         System.out.print("Enter the number of classes under the Professor: ");
-        int classesUnderProfessor = scanner.nextInt();
+        while(true)
+        {
+            try
+            {
+                classesUnderProfessor = scanner.nextInt();
+                if(classesUnderProfessor < 0)
+                {
+                    System.out.print(newline+"Number of classes cannot be negative. Please enter a valid number of classes : ");
+                    continue;
+                }
+                {
+                    if (count > 1)
+                        System.out.print(newline);
+                    break;
+                }
+            }
+            catch (InputMismatchException e)
+            {
+                //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                if(count == 1)
+                {
+                    System.out.print(newline);
+                    count++;
+                }
+                System.out.print("Invalid input. Please enter a valid number of classes : ");
+                scanner.next();
+            }
+        }
     
         System.out.println(newline+"#Professor details added successfully#"+newline);
     
@@ -120,10 +221,10 @@ public class ProfessorDetails extends CollegeDatabase
         {
             if (arrDetails[i] != null)              //if index's entry is not null, print the name of the professor in tabular form
             {
-                System.out.println("("+i+") "+arrDetails[i].name+'\t');
+                System.out.print("("+i+") "+arrDetails[i].name+newline);
 
-                if (i%3 == 0)
-                    System.out.print(newline);      //after every 3 names, print a new line
+                if (i%10 == 0)
+                    System.out.print(newline);      //after every 10 names, print a new lines
             }
         }
 
@@ -142,10 +243,10 @@ public class ProfessorDetails extends CollegeDatabase
         {
             if (arrDetails[i] != null)              //if index's entry is not null, print the name of the students in tabular form
             {
-                System.out.println(arrDetails[i].name+'\t');
-    
-                if (i%4 == 0)
-                    System.out.print(newline);      //after every 4 names, print a new line
+                System.out.print(arrDetails[i].name+newline);
+
+                if (i%10 == 0)
+                    System.out.print(newline);      //after every 10 names, print a new line
             }
         }
     
@@ -161,6 +262,7 @@ public class ProfessorDetails extends CollegeDatabase
 
         System.out.print("Enter the no. of Professor to view details : ");
         int choice3 = scanner.nextInt();
+
 
         String newline = System.lineSeparator();
 
@@ -264,24 +366,63 @@ public class ProfessorDetails extends CollegeDatabase
                     break;
 
                 case 6:
+                    int salary;
                     System.out.print(newline+"Enter updated Professor Salary : ");
-                    int salary = scanner.nextInt();
-                    arrDetails[choice].salary = salary;
-                    System.out.print(newline+"#Professor Details Updated#");
+                    while(true)
+                    {
+                        try
+                        {
+                            salary = scanner.nextInt();
+                            arrDetails[choice].salary = salary;
+                            System.out.print(newline+"#Professor Details Updated#");
+                            break;
+                        }
+                        catch (InputMismatchException e)
+                        {
+                            System.out.print(newline+"Enter a valid number : ");
+                            scanner.next();
+                        }
+                    }
                     break;
 
                 case 7:
+                    int studentsUnderProfessor;
                     System.out.print(newline+"Enter updated number of students under the Professor : ");
-                    int studentsUnderProfessor = scanner.nextInt();
-                    arrDetails[choice].studentsUnderProfessor = studentsUnderProfessor;
-                    System.out.print(newline+"#Professor Details Updated#");
+                    while(true)
+                    {
+                        try
+                        {
+                            studentsUnderProfessor = scanner.nextInt();
+                            arrDetails[choice].studentsUnderProfessor = studentsUnderProfessor;
+                            System.out.print(newline+"#Professor Details Updated#");
+                            break;
+                        }
+                        catch (InputMismatchException e)
+                        {
+                            System.out.print(newline+"Enter a valid number : ");
+                            scanner.next();
+                        }
+                    }
                     break;
 
                 case 8:
+                    int classesUnderProfessor;
                     System.out.print(newline+"Enter updated number of classes under the Professor : ");
-                    int classesUnderProfessor = scanner.nextInt();
-                    arrDetails[choice].classesUnderProfessor = classesUnderProfessor;
-                    System.out.print(newline+"#Professor Details Updated#");
+                    while(true)
+                    {
+                        try
+                        {
+                            classesUnderProfessor = scanner.nextInt();
+                            arrDetails[choice].classesUnderProfessor = classesUnderProfessor;
+                            System.out.print(newline+"#Professor Details Updated#");
+                            break;
+                        }
+                        catch (InputMismatchException e)
+                        {
+                            System.out.print(newline+"Enter a valid number : ");
+                            scanner.next();
+                        }
+                    }
                     break;
 
                 case 9:
