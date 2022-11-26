@@ -10,6 +10,7 @@
 package CollegeDatabase;
 
 import java.io.FilterInputStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.lang.Character;
 
@@ -80,6 +81,9 @@ public class StudentDetails extends CollegeDatabase
 
     public void addStudentDetails (int i)
     {
+        //clear the screen before displaying the options and menu
+        super.clearScreen();
+
         String newline = System.lineSeparator();
         Scanner scanner = new Scanner(new FilterInputStream(new FilterInputStream(System.in){public void close(){}}){public void close(){}});
 
@@ -89,8 +93,40 @@ public class StudentDetails extends CollegeDatabase
         String name = scanner.nextLine();
         System.out.print("Enter the student Registration Number : ");
         String registrationNo = scanner.nextLine();
+
+        int count = 1;
+        int age;
         System.out.print("Enter the student age : ");
-        int age = scanner.nextInt();
+        while(true)
+        {
+            try
+            {
+                age = scanner.nextInt();
+                if(age < 0)
+                {
+                    System.out.print("Enter a valid age : ");
+                    continue;
+                }
+                else
+                {
+                    if (count > 1)
+                        System.out.print(newline);
+                    break;
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                if(count == 1)
+                {
+                    System.out.print(newline);
+                    count++;
+                }
+                System.out.print("Enter a valid age : ");
+                scanner.nextLine();
+            }
+        }
+
         System.out.print("Enter the student Date of Birth : ");
         String dob = scanner.next();
 
@@ -117,16 +153,201 @@ public class StudentDetails extends CollegeDatabase
         this.percentage = 0;
 
         System.out.print(newline+"Enter the student marks : "+newline+newline);
+        
+        int count = 1;
+        float cse;
         System.out.print("Enter the student CSE marks : ");
-        float cse = scanner.nextFloat();
+        while(true)
+        {
+            try
+            {
+                cse = scanner.nextFloat();
+                if(cse < 0 || cse > 100)
+                {
+                    //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                    if(count == 1)
+                    {
+                        System.out.print(newline);
+                        count++;
+                    } 
+                    System.out.print("Enter valid marks (0-100) : ");
+                    continue;
+                }
+                else
+                {
+                    if (count > 1)
+                        System.out.print(newline);
+                    break;
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                if(count == 1)
+                {
+                    System.out.print(newline);
+                    count++;
+                } 
+                System.out.print("Enter valid marks : ");
+                scanner.nextLine();
+            }
+        }
+
+        count = 1;
+        float dsa;
         System.out.print("Enter the student DSA marks : ");
-        float dsa = scanner.nextFloat();
+        while(true)
+        {
+            try
+            {
+                dsa = scanner.nextFloat();
+                if(dsa < 0 || dsa > 100)
+                {
+                    //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                    if(count == 1)
+                    {
+                        System.out.print(newline);
+                        count++;
+                    }
+                    System.out.print("Enter valid marks (0-100) : ");
+                    continue;
+                }
+                else
+                {
+                    if (count > 1)
+                        System.out.print(newline);
+                    break;
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                if(count == 1)
+                {
+                    System.out.print(newline);
+                    count++;
+                } 
+                System.out.print("Enter valid marks : ");
+                scanner.nextLine();
+            }
+        }
+
+        count = 1;
+        float oop;
         System.out.print("Enter the student OOP marks : ");
-        float oop = scanner.nextFloat();
+        while(true)
+        {
+            try
+            {
+                oop = scanner.nextFloat();
+                if(oop < 0 || oop > 100)
+                {
+                    //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                    if(count == 1)
+                    {
+                        System.out.print(newline);
+                        count++;
+                    }
+                    System.out.print("Enter valid marks (0-100) : ");
+                    continue;
+                }
+                else
+                {
+                    if (count > 1)
+                        System.out.print(newline);
+                    break;
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                if(count == 1)
+                {
+                    System.out.print(newline);
+                    count++;
+                } 
+                System.out.print("Enter valid marks : ");
+                scanner.nextLine();
+            }
+        }
+
+        count = 1;
+        float dbms;
         System.out.print("Enter the student DBMS marks : ");
-        float dbms = scanner.nextFloat();
+        while(true)
+        {
+            try
+            {
+                dbms = scanner.nextFloat();
+                if(dbms < 0 || dbms > 100)
+                {
+                    //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                    if(count == 1)
+                    {
+                        System.out.print(newline);
+                        count++;
+                    }
+                    System.out.print("Enter valid marks (0-100) : ");
+                    continue;
+                }
+                else
+                {
+                    if (count > 1)
+                        System.out.print(newline);
+                    break;
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                if(count == 1)
+                {
+                    System.out.print(newline);
+                    count++;
+                } 
+                System.out.print("Enter valid marks : ");
+                scanner.nextLine();
+            }
+        }
+
+        count = 1;
+        float csa;
         System.out.print("Enter the student CSA marks : ");
-        float csa = scanner.nextFloat();
+        while(true)
+        {
+            try
+            {
+                csa = scanner.nextFloat();
+                if(csa < 0 || csa > 100)
+                {
+                    //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                    if(count == 1)
+                    {
+                        System.out.print(newline);
+                        count++;
+                    }
+                    System.out.print("Enter valid marks (0-100) : ");
+                    continue;
+                }
+                else
+                {
+                    if (count > 1)
+                        System.out.print(newline);
+                    break;
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                //when the wrong input is entered first time, print a new line, to distinguish from previous outputs
+                if(count == 1)
+                {
+                    System.out.print(newline);
+                    count++;
+                } 
+                System.out.print("Enter valid marks : ");
+                scanner.nextLine();
+            }
+        }
 
         System.out.println(newline+"#Student marks added successfully#"+newline);
 
@@ -245,10 +466,10 @@ public class StudentDetails extends CollegeDatabase
         {
             if (arrDetails[i] != null)    //if index's entry is not null, print the name of the students in tabular form
             {
-                System.out.println("("+i+") "+arrDetails[i].name+'\t');
+                System.out.print("("+i+") "+arrDetails[i].name+newline);
 
-                if (i%3 == 0)
-                    System.out.print(newline);      //after every 3 names, print a new line
+                if (i%10 == 0)
+                    System.out.print(newline);      //after every 10 names, print a new line
             }
         }
 
@@ -266,10 +487,10 @@ public class StudentDetails extends CollegeDatabase
         {
             if (arrDetails[i] != null)    //if index's entry is not null, print the name of the students in tabular form
             {
-                System.out.println(arrDetails[i].name+'\t');
+                System.out.print(arrDetails[i].name+newline);
     
-                if (i%4 == 0)
-                    System.out.print(newline);      //after every 4 names, print a new line
+                if (i%10 == 0)
+                    System.out.print(newline);      //after every 10 names, print a new line
             }
         }
     
@@ -439,10 +660,24 @@ public class StudentDetails extends CollegeDatabase
                     break;
 
                 case 3:
+                    int age;
                     System.out.print(newline+"Enter updated student age : ");
-                    int age = scanner.nextInt();
-                    arrDetails[choice].age = age;
-                    System.out.print(newline+"#Student Details Updated#");
+                    while(true)
+                    {
+                        try
+                        {
+                            age = scanner.nextInt();
+                            arrDetails[choice].age = age;
+                            System.out.print(newline+"#Student Details Updated#");
+                            break;
+                        }
+
+                        catch (InputMismatchException e)
+                        {
+                            System.out.print(newline+"Please enter a valid age : ");
+                            scanner.next();
+                        }
+                    }
                     break;
 
                 case 4:
@@ -554,38 +789,108 @@ public class StudentDetails extends CollegeDatabase
             switch (option)
             {
                 case 1:
+                    int cse;
                     System.out.print(newline+"Enter new or updated CSE marks : ");
-                    float cse = scanner.nextFloat();
-                    arrMarks[choice].cse = cse;
-                    System.out.print(newline+"#Student Marks Added or Updated#");
+                    while(true)
+                    {
+                        try
+                        {
+                            cse = scanner.nextInt();
+                            arrMarks[choice].cse = cse;
+                            System.out.print(newline+"#Student Marks Updated#");
+                            break;
+                        }
+
+                        catch (InputMismatchException e)
+                        {
+                            System.out.print(newline+"Please enter a valid marks : ");
+                            scanner.next();
+                        }
+                    }
                     break;
 
                 case 2:
+                    int dsa;
                     System.out.print(newline+"Enter new or updated DSA marks : ");
-                    float dsa = scanner.nextFloat();
-                    arrMarks[choice].dsa = dsa;
-                    System.out.print(newline+"#Student Marks Added or Updated#");
+                    while(true)
+                    {
+                        try
+                        {
+                            dsa = scanner.nextInt();
+                            arrMarks[choice].dsa = dsa;
+                            System.out.print(newline+"#Student Marks Updated#");
+                            break;
+                        }
+
+                        catch (InputMismatchException e)
+                        {
+                            System.out.print(newline+"Please enter a valid marks : ");
+                            scanner.next();
+                        }
+                    }
                     break;
 
                 case 3:
+                    int oop;
                     System.out.print(newline+"Enter new or updated OOP marks : ");
-                    float oop = scanner.nextFloat();
-                    arrMarks[choice].oop = oop;
-                    System.out.print(newline+"#Student Marks Added or Updated#");
+                    while(true)
+                    {
+                        try
+                        {
+                            oop = scanner.nextInt();
+                            arrMarks[choice].oop = oop;
+                            System.out.print(newline+"#Student Marks Updated#");
+                            break;
+                        }
+
+                        catch (InputMismatchException e)
+                        {
+                            System.out.print(newline+"Please enter a valid marks : ");
+                            scanner.next();
+                        }
+                    }
                     break;
 
                 case 4:
+                    int dbms;
                     System.out.print(newline+"Enter new or updated DBMS marks : ");
-                    float dbms = scanner.nextFloat();
-                    arrMarks[choice].dbms = dbms;
-                    System.out.print(newline+"#Student Marks Added or Updated#");
+                    while(true)
+                    {
+                        try
+                        {
+                            dbms = scanner.nextInt();
+                            arrMarks[choice].dbms = dbms;
+                            System.out.print(newline+"#Student Marks Updated#");
+                            break;
+                        }
+
+                        catch (InputMismatchException e)
+                        {
+                            System.out.print(newline+"Please enter a valid marks : ");
+                            scanner.next();
+                        }
+                    }
                     break;
 
                 case 5:
+                    int csa;
                     System.out.print(newline+"Enter new or updated CSA marks : ");
-                    float csa = scanner.nextFloat();
-                    arrMarks[choice].csa = csa;
-                    System.out.print(newline+"#Student Marks Updated#");
+                    while(true)
+                    {
+                        try
+                        {
+                            csa = scanner.nextInt();
+                            arrMarks[choice].csa = csa;
+                            System.out.print(newline+"#Student Marks Updated#");
+                            break;
+                        }
+
+                        catch (InputMismatchException e)
+                        {
+                            System.out.print(newline+"Please enter a valid marks : ");
+                            scanner.next();
+                        }
+                    }
                     break;
 
                 case 6:
@@ -808,20 +1113,20 @@ public class StudentDetails extends CollegeDatabase
         return count;
     }
 
-    //convert the char to lowercase
-    public static char toLowerCase(char ch)
+    //simple method to print line, result in better looking code and reusable code
+    public void line ()
+    {
+        String newline = System.lineSeparator();
+        System.out.println(newline+"---------------------------------------------------------------------------------"+newline);
+    }
+
+    //convert the char entered to lowercase
+    public static char loLowerCase(char ch)
     {
         if (ch >= 'A' && ch <= 'Z')
         {
             ch = (char)(ch + 'a' - 'A');
         }
         return ch;
-    }
-
-    //simple method to print line, result in better looking code and reusable code
-    public void line ()
-    {
-        String newline = System.lineSeparator();
-        System.out.println(newline+"---------------------------------------------------------------------------------"+newline);
     }
 }
