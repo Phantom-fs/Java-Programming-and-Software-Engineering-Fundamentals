@@ -14,7 +14,7 @@ public class FindingMultipleGene
     {
         //stop codon here is a string i.e. with value "TAA", "TAG" or "TGA"
 
-        int currIndex = dna.indexOf(stopCodon, startIndex+3);
+        int currIndex = dna.indexOf(stopCodon, startIndex);
 
         while(currIndex != -1)
         {
@@ -97,7 +97,7 @@ public class FindingMultipleGene
                 count++;      //to know that atleast one gene is found
 
                 //now find the next ATG after the currEndIndex, thus add 1 to currEndIndex
-                currStartIndex = dna.indexOf("ATG", currEndIndex+1);
+                currStartIndex = dna.indexOf("ATG", currEndIndex);
 
                 //if no new ATG found, then break the loop
                 if(currStartIndex == -1)
