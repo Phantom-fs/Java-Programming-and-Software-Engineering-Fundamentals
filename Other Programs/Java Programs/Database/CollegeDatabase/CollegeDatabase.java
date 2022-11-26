@@ -28,9 +28,25 @@ public class CollegeDatabase
         */
         Scanner scanner = new Scanner(new FilterInputStream(System.in){public void close(){}});
 
-        char mainChoice = 'a';      //default value for main menu choice
+        char mainChoice;        //main menu choice
+        int countProf = 0;      //count of professors 
+        int countStudent = 0;   //count of students
+
+
+        //defining the variables here to increase their scope, so that upon returning back to database, they are not reset
+
+        char profChoice;     //choice for professor database
+        int k = 0;           //index for inclusion of professor details
+
+        char choice;
+        int i = 0;       //index for the inclusion of student details
+        int j = 0;       //index for the inclusion of student marks
 
         CollegeDatabase obj = new CollegeDatabase();
+
+        ProfessorDetails profObj = new ProfessorDetails();    //creating object and initializing it with default type constructor
+
+        StudentDetails studentObj = new StudentDetails();     //creating object and initializing it with default type constructor
 
         System.out.print(newline + "***************************************************************************" + newline);
 
@@ -61,13 +77,12 @@ public class CollegeDatabase
              *------------------------------------------------------------------------------------------------------------------------------
             */
             if (mainChoice == 'a')
-            {
-                char profChoice;     //choice for professor database
-                int k = 0;           //index for inclusion of professor details
+            {      
+                //Clearing the screen
+                obj.clearScreen();
 
-                ProfessorDetails profObj = new ProfessorDetails();    //creating object and initializing it with default type constructor
-
-                profObj.arrValueNullProvider();                       //initializing array values to null
+                if(countProf == 0)
+                    profObj.arrValueNullProvider();     //initializing array values to null for first time only             
 
                 System.out.print(newline + "*********************************************************************************" + newline);
  
@@ -77,44 +92,53 @@ public class CollegeDatabase
 
                 Thread.sleep(2000);     //delay of 2 seconds
 
-                System.out.print(newline+"Enter the correct input from menu"+newline);
-
                 //menu, using do while loop as want to print this menu at least once
                 do
                 {
-                    System.out.print(newline+"----------------------------------   MENU   -----------------------------------");
-                    System.out.print(newline+"|       (a) Add Professor Details      |       (b) View Professor Details      |");
-                    System.out.print(newline+"-------------------------------------------------------------------------------");
-                    System.out.print(newline+"|                                  (x) Exit                                    |");
-                    System.out.print(newline+"-------------------------------------------------------------------------------");
+                    //if professor details are already entered previously, then this menu will not be displayed
+                    if(countProf == 0)
+                    {
+                        System.out.print(newline+"Enter the correct input from menu"+newline);
+
+                        System.out.print(newline+"----------------------------------   MENU   -----------------------------------");
+                        System.out.print(newline+"|       (a) Add Professor Details      |       (b) View Professor Details      |");
+                        System.out.print(newline+"-------------------------------------------------------------------------------");
+                        System.out.print(newline+"|                                  (x) Exit                                    |");
+                        System.out.print(newline+"-------------------------------------------------------------------------------");
         
-                    System.out.print(newline+newline+"Enter your choice : ");
-                    profChoice = scanner.next().charAt(0);         //taking char at first index, i.e. first character of the input string
-                    profChoice = Character.toLowerCase(profChoice);       //converting to lower case
+                        System.out.print(newline+newline+"Enter your choice : ");
+                        profChoice = scanner.next().charAt(0);         //taking char at first index, i.e. first character of the input string
+                        profChoice = Character.toLowerCase(profChoice);       //converting to lower case
 
-                    profObj.line();
-
-                    if (profChoice == 'b')
-                    {
-                        System.out.println(newline+"No professor details found, Please add professor details"+newline);
                         profObj.line();
+
+                        if (profChoice == 'b')
+                        {
+                            System.out.println(newline+"No professor details found, Please add professor details"+newline);
+                            profObj.line();
+                        }
+
+                        else if (profChoice == 'a')
+                        {
+                            profObj.addProfessorDetails(k);  
+                            profObj.line();
+
+                            k++;           //increment index for the inclusion of professor details
+
+                            profObj.line();
+                        }
+
+                        else if (profChoice != 'x' && profChoice != 'a' && profChoice != 'b')
+                        {
+                            System.out.println(newline+"Invalid input, Please enter a valid input"+newline);
+                            profObj.line();
+                        }
+
+                        countProf++;      //incrementing countProf, so that it does not print the menu again
                     }
 
-                    else if (profChoice == 'a')
-                    {
-                        profObj.addProfessorDetails(k);  
-                        profObj.line();
-
-                        ++k;           //increment index for the inclusion of professor details
-
-                        profObj.line();
-                    }
-
-                    else if (profChoice != 'x' && profChoice != 'a' && profChoice != 'b')
-                    {
-                        System.out.println(newline+"Invalid input, Please enter a valid input"+newline);
-                        profObj.line();
-                    }
+                    else
+                        profChoice = 'a';          //if professor details are already added previously, then directly go to add professor details
 
                     Thread.sleep(1500);     //to pause the program for 1.5 seconds
 
@@ -128,7 +152,11 @@ public class CollegeDatabase
                         //internal do-while loop, run atleast once, until exit is entered  
                         do
                         {
-                            System.out.print(newline+"-------------------------------=---   MENU   ------------------=-----------------");
+                            obj.clearScreen();
+
+                            System.out.print(newline+"Enter the correct input from menu"+newline);
+
+                            System.out.print(newline+"-----------------------------------   MENU   ------------------------------------");
                             System.out.print(newline+"|       (a) Add Professor Details       |       (b) View Professor Detail        |");
                             System.out.print(newline+"---------------------------------------------------------------------------------");
                             System.out.print(newline+"|       (c) Update Professor Details    |       (d) Delete Professor Details     |");
@@ -143,6 +171,9 @@ public class CollegeDatabase
                             profChoice = scanner.next().charAt(0);
                             profChoice = Character.toLowerCase(profChoice);
 
+                            //Clearing the screen
+                            obj.clearScreen();
+
                             switch(profChoice)    //all methods are invoked based on the menu driven options
                             {  
                                 case 'a':
@@ -151,18 +182,24 @@ public class CollegeDatabase
                                 break;
 
                             case 'b':
+                                obj.clearScreen();
+
                                 //view a professor based on the professor id
                                 profObj.viewProfessorDetails();
                                 Thread.sleep(3000);
                                 break;
 
                             case 'c':
+                                obj.clearScreen();
+
                                 //update a professor based on the professor id
                                 profObj.updateProfessorDetails();
                                 Thread.sleep(2000);
                                 break;
 
                             case 'd':
+                                obj.clearScreen();
+
                                 profObj.deleteProfessorDetails(); 
 
                                 //boolean method to check whether deletion is successful or not                           
@@ -176,12 +213,16 @@ public class CollegeDatabase
                                 break;
 
                             case 'e':
+                                obj.clearScreen();
+
                                 //display all professors but their names only
                                 profObj.displayAllProfessorWithoutIndex();
                                 Thread.sleep(3000);
                                 break;
 
                             case 'f':
+                                obj.clearScreen();
+
                                 //display all professors and all their details
                                 profObj.displayAllProfessorDetails();
                                 Thread.sleep(3500);
@@ -214,13 +255,11 @@ public class CollegeDatabase
             */
             else if (mainChoice == 'b')
             {
-                char choice;
-                int i = 0;       //index for the inclusion of student details
-                int j = 0;       //index for the inclusion of student marks
+                //Clearing the screen
+                obj.clearScreen();
 
-                StudentDetails defaultObj = new StudentDetails();      //creating object and initializing it with default type constructor
-
-                defaultObj.arrValueNullProvider();                     //initializing the name and marks array with null values
+                if(countStudent == 0)
+                    studentObj.arrValueNullProvider();                       //initializing name and marks array values to null for first time only
 
                 System.out.print(newline + "*********************************************************************************" + newline);
  
@@ -230,55 +269,64 @@ public class CollegeDatabase
 
                 Thread.sleep(2000);     //delay of 2 seconds
 
-                System.out.print(newline+"Enter the correct input from menu"+newline);
-
                 //menu, using do while loop as want to print this menu at least once
                 do
                 {
-                    System.out.print(newline+"----------------------------------   MENU   -----------------------------------");
-                    System.out.print(newline+"|       (a) Add Student Details        |       (b) View Student Details        |");
-                    System.out.print(newline+"-------------------------------------------------------------------------------");
-                    System.out.print(newline+"|                                  (x) Exit                                    |");
-                    System.out.print(newline+"-------------------------------------------------------------------------------");
+                    //if professor details are already entered previously, then this menu will not be displayed
+                    if(countStudent == 0)
+                    {
+                        System.out.print(newline+"Enter the correct input from menu"+newline);
+
+                        System.out.print(newline+"----------------------------------   MENU   -----------------------------------");
+                        System.out.print(newline+"|       (a) Add Student Details        |       (b) View Student Details        |");
+                        System.out.print(newline+"-------------------------------------------------------------------------------");
+                        System.out.print(newline+"|                                  (x) Exit                                    |");
+                        System.out.print(newline+"-------------------------------------------------------------------------------");
         
-                    System.out.print(newline+newline+"Enter your choice : ");
-                    choice = scanner.next().charAt(0);      //taking char at first index, i.e. first character of the input string
-                    choice = Character.toLowerCase(choice);       //converting to lower case
+                        System.out.print(newline+newline+"Enter your choice : ");
+                        choice = scanner.next().charAt(0);      //taking char at first index, i.e. first character of the input string
+                        choice = Character.toLowerCase(choice);       //converting to lower case
 
-                    defaultObj.line();
+                        studentObj.line();
 
-                    if (choice == 'b')
-                    {
-                        System.out.println(newline+"No student details found, Please add student details"+newline);
-                        defaultObj.line();
-                    }
-
-                    else if (choice == 'a')
-                    {
-                        defaultObj.addStudentDetails(i);  
-                        defaultObj.line();
-
-                        System.out.print(newline+"Would you like to add " +defaultObj.StudentName(i)+ "'s marks? (y/n) : ");
-                        Character yORn = scanner.next().charAt(0);
-                        yORn = Character.toLowerCase(yORn);
-
-                        if (yORn == 'y')
+                        if (choice == 'b')
                         {
-                            defaultObj.line();
-                            defaultObj.addStudentMarks(j); 
-                            ++j;       //increment index for the inclusion of student marks            
+                            System.out.println(newline+"No student details found, Please add student details"+newline);
+                            studentObj.line();
+                        }   
+
+                        else if (choice == 'a')
+                        {   
+                            studentObj.addStudentDetails(i);  
+                            studentObj.line();
+
+                            System.out.print(newline+"Would you like to add " +studentObj.StudentName(i)+ "'s marks? (y/n) : ");
+                            Character yORn = scanner.next().charAt(0);
+                            yORn = Character.toLowerCase(yORn);
+
+                            if (yORn == 'y')
+                            {
+                                studentObj.line();
+                                studentObj.addStudentMarks(j); 
+                                ++j;       //increment index for the inclusion of student marks            
+                            }
+
+                            ++i;           //increment index for the inclusion of student details
+
+                            studentObj.line();
                         }
 
-                        ++i;           //increment index for the inclusion of student details
+                        else if (choice != 'x' && choice != 'a' && choice != 'b')
+                        {
+                            System.out.println(newline+"Invalid input, Please enter a valid input"+newline);
+                            studentObj.line();
+                        }
 
-                        defaultObj.line();
+                        countStudent++;        //incrementing countStudent, so that it does not print the menu again
                     }
 
-                    else if (choice != 'x' && choice != 'a' && choice != 'b')
-                    {
-                        System.out.println(newline+"Invalid input, Please enter a valid input"+newline);
-                        defaultObj.line();
-                    }
+                    else
+                        choice = 'a';   
 
                     Thread.sleep(1500);     //to pause the program for 1.5 seconds
 
@@ -291,6 +339,10 @@ public class CollegeDatabase
                     {
                         do
                         {
+                            obj.clearScreen();
+
+                            System.out.print(newline+"Enter the correct input from menu"+newline);
+
                             System.out.print(newline+"----------------------------------   MENU   -----------------------------------");
                             System.out.print(newline+"|       (a) Add Student Details        |       (b) View Students Detail        |");
                             System.out.print(newline+"-------------------------------------------------------------------------------");
@@ -315,28 +367,34 @@ public class CollegeDatabase
                             switch(choice)    //all methods are invoked based on the menu driven options
                             {  
                                 case 'a':
-                                defaultObj.addStudentDetails(i);
+                                studentObj.addStudentDetails(i);
                                 ++i;
                                 break;
 
                             case 'b':
+                                obj.clearScreen();
+
                                 //view a student based on student index
-                                defaultObj.viewStudentDetails();
+                                studentObj.viewStudentDetails();
                                 Thread.sleep(3000);
                                 break;
 
                             case 'c':
+                                obj.clearScreen();
+
                                 //update a student based on student index
-                                defaultObj.updateStudentDetails();
+                                studentObj.updateStudentDetails();
                                 Thread.sleep(2000);
                                 break;
 
                             case 'd':
+                                obj.clearScreen();
+
                                 //delete a student based on student index
-                                defaultObj.deleteStudentDetails();
+                                studentObj.deleteStudentDetails();
 
                                 //decrement index if a student has been deleted based on output of boolean method                      
-                                if (defaultObj.taskDeleteDetailsANS() == true)
+                                if (studentObj.taskDeleteDetailsANS() == true)
                                 {
                                     --i;
                                 }
@@ -347,50 +405,64 @@ public class CollegeDatabase
                                 break;
 
                             case 'e':
+                                obj.clearScreen();
+
                                 //add marks of student based on student index from menu
-                                defaultObj.addStudentMarksOption();
+                                studentObj.addStudentMarksOption();
                                 Thread.sleep(2000);
                                 break;
 
                             case 'f':
+                                obj.clearScreen();
+
                                 //view marks based on student index
-                                defaultObj.viewStudentMarks();
+                                studentObj.viewStudentMarks();
                                 Thread.sleep(3000);
                                 break;
 
                             case 'g':
+                                obj.clearScreen();
+
                                 //update marks based on student index
-                                defaultObj.updateStudentMarks();
+                                studentObj.updateStudentMarks();
                                 Thread.sleep(2000);
                                 break;
 
                             case 'h':
+                                obj.clearScreen();
+
                                 //delete marks based on student index
-                                defaultObj.deleteStudentMarks();
+                                studentObj.deleteStudentMarks();
                                 Thread.sleep(2000);
                                 break;
 
                             case 'i':
                                 //display all students name only
-                                defaultObj.displayAllStudentWithoutIndex();
+                                studentObj.displayAllStudentWithoutIndex();
                                 Thread.sleep(3000);
                                 break;
 
                             case 'j':
+                                obj.clearScreen();
+
                                 //display all students details
-                                defaultObj.displayAllStudentDetails();
+                                studentObj.displayAllStudentDetails();
                                 Thread.sleep(3500);
                                 break;
 
                             case 'k':
+                                obj.clearScreen();
+
                                 //display all students marks
-                                defaultObj.displayAllStudentMarks();
+                                studentObj.displayAllStudentMarks();
                                 Thread.sleep(5500);
                                 break;
 
                             case 'l':
+                                obj.clearScreen();
+
                                 //display all students and all their details and marks
-                                defaultObj.displayAllStudentAllDetails();
+                                studentObj.displayAllStudentAllDetails();
                                 Thread.sleep(5500);
                                 break;
 
@@ -402,9 +474,9 @@ public class CollegeDatabase
                                 break;                
                             }
 
-                            defaultObj.line();
+                            studentObj.line();
 
-                            Thread.sleep(3000);     //to pause the program for 3 seconds
+                            Thread.sleep(2000);     //to pause the program for 3 seconds
                         }
                         while (choice != 'x');     //if choice is x, then exit the program
 
@@ -422,10 +494,12 @@ public class CollegeDatabase
 
             else if (mainChoice == 'x')
             {
+                //clearing the screen
+                obj.clearScreen();
+
                 obj.line();
                 System.out.print(newline+"------------------------------------- Exiting -----------------------------------"+newline);
                 obj.line();
-                System.out.print(newline);
             }
 
             else
@@ -439,23 +513,35 @@ public class CollegeDatabase
             if (mainChoice == 'a' || mainChoice == 'b')
             {
                 obj.line();
-                obj.line();
-                System.out.print(newline);
-                System.out.print(newline);
+                obj.clearScreen();
             }
 
             Thread.sleep(1500);     //to pause the program for 2 seconds
         }  
         while (mainChoice != 'x');    //exit upon x input in master do-while loop         
 
-        System.out.print(newline+"********************   Thank you for using the application   ********************"+newline);
+        System.out.print(newline+newline+"Thank you for using the application...");
 
-        System.out.print(newline+"*********************************************************************************"+newline+newline);
+        System.out.print(newline+newline);
 
         Thread.sleep(1500);     //to pause the program for 1.5 seconds
 
         scanner.close();
-    }  
+    }//end of main method
+
+    //abstract method to print line, result in better looking code and reusable code, defined in extraMethods
+    public void line ()
+    {
+        String newline = System.lineSeparator();
+        System.out.print(newline+"*********************************************************************************"+newline);
+    }
+
+    //method to clear or flush the screen
+    public void clearScreen()
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
     //to lowercase conversion method
     public static char toLowerCase(char ch)
@@ -465,12 +551,5 @@ public class CollegeDatabase
             ch = (char)(ch + 'a' - 'A');
         }
         return ch;
-    }
-
-    //simple method to print line, result in better looking code and reusable code
-    public void line ()
-    {
-        String newline = System.lineSeparator();
-        System.out.print(newline+"*********************************************************************************"+newline);
     }
 }
