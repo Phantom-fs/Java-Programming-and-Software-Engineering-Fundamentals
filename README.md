@@ -23,6 +23,9 @@
   * [Java Programming: Principles of Software Design](https://www.dukelearntoprogram.com//course4/index.php)
   * [Java Programming: Build a Recommendation System](https://www.dukelearntoprogram.com//course5/index.php)
 
+#### [Web Development Projects](https://github.com/Phantom-fs/Java-Programs)
+#### [Java Programs](https://github.com/Phantom-fs/Java-Programs)
+
 - - - -
 
 
